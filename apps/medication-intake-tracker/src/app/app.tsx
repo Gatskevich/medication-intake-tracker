@@ -1,13 +1,23 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { MedicationsProvider } from '../utils/contexts/MedicationsContext';
 import styles from './app.module.scss';
 
-import NxWelcome from './nx-welcome';
+const LazyMedicationList = lazy(() => import('../components/MedicationList/MedicationList'));
+const LazyMedicationDetails = lazy(() => import('../components/MedicationDetails/MedicationDetails'));
 
-export function App() {
+const App = () => {
   return (
-    <div>
-      <NxWelcome title="medication-intake-tracker" />
-    </div>
+    <MedicationsProvider>
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<LazyMedicationList />} />
+            <Route path="/medication/:id/*" element={<LazyMedicationDetails />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </MedicationsProvider>
   );
 }
 
