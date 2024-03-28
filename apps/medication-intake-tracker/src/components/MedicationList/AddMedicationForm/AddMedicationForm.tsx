@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useMedication } from "../../../utils/contexts/MedicationsContext";
-import { IMedicationForm } from "../../../interfaces/IMedicationForm";
+import { IMedicationForm, IMedication } from "../../../interfaces";
 import "./AddMedicationForm.scss";
 
 const schema: Yup.ObjectSchema<IMedicationForm> = Yup.object().shape({
@@ -27,7 +27,7 @@ const schema: Yup.ObjectSchema<IMedicationForm> = Yup.object().shape({
 });
 
 interface AddMedicationFormProps {
-  medication?: IMedicationForm;
+  medication?: IMedication;
   onClose: () => void;
 }
 
@@ -35,7 +35,7 @@ export const AddMedicationForm = ({
   medication,
   onClose,
 }: AddMedicationFormProps) => {
-  const { addMedication } = useMedication();
+  const { addMedication, updateMedication } = useMedication();
 
   const {
     register,
@@ -48,7 +48,12 @@ export const AddMedicationForm = ({
   });
 
   const onSubmit = (data: IMedicationForm) => {
-    addMedication(data);
+    if(medication){
+      updateMedication(medication.id, data)
+    } else {
+      addMedication(data);
+    }
+  
     onClose();
     reset();
   };

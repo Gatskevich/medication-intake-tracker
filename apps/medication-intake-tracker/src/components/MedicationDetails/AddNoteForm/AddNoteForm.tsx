@@ -3,8 +3,7 @@ import { CustomEditor } from "../CustomEditor/CustomEditor";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMedication } from "../../../utils/contexts/MedicationsContext";
 import * as Yup from "yup";
-import { IMedicationNoteForm } from "../../../interfaces/IMedicationNoteForm";
-import { IMedication } from "../../../interfaces";
+import { IMedication, IMedicationNoteForm } from "../../../interfaces";
 
 const schema: Yup.ObjectSchema<IMedicationNoteForm> = Yup.object().shape({
   note: Yup.string().required("Text note is required"),

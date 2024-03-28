@@ -1,11 +1,11 @@
 import { useEffect, useReducer, useRef } from "react";
-import { IMedication } from "../interfaces";
 import { useStorage } from "../utils/custom-hooks/useStorage";
 import {
   initialState,
   medicationsReducer,
 } from "../utils/reducers/medicationsReducer";
-import { IMedicationForm } from "../interfaces/IMedicationForm";
+import { IMedicationForm, IMedication } from "../interfaces";
+import { generateUuidv4 } from "../utils/help-functions/generateUuidv4";
 
 export interface IMedicationService {
   medications: IMedication[];
@@ -17,10 +17,6 @@ export interface IMedicationService {
   deleteMedication: (id: string) => void;
   getMedicationById: (id: string) => IMedication | undefined;
 }
-
-const generateId = (): string => {
-  return Math.random().toString(36).slice(2, 9);
-};
 
 export const useMedicationService = (): IMedicationService => {
   const [medicationsStorage, setMedicationsStorage] = useStorage<IMedication[]>(
@@ -48,7 +44,7 @@ export const useMedicationService = (): IMedicationService => {
   const addMedication = (medication: IMedicationForm) => {
     const newMedication: IMedication = {
       ...medication,
-      id: generateId(),
+      id: generateUuidv4(),
       updatedAt: Date.now(),
     };
 
