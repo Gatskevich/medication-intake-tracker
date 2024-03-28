@@ -1,13 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { IMedication } from '../../interfaces';
-import { useMedication } from '../../utils/contexts/MedicationsContext';
-import { AddMedicationForm } from '../MedicationList/AddMedicationForm/AddMedicationForm';
-import './MedicationDetails.scss';
+import { useState, useEffect, useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { IMedication } from "../../interfaces";
+import { useMedication } from "../../utils/contexts/MedicationsContext";
+import { AddMedicationForm } from "../MedicationList/AddMedicationForm/AddMedicationForm";
+import "./MedicationDetails.scss";
 
-import { TextNote } from './TextNote/TextNote';
-import { AddNoteForm } from './AddNoteForm/AddNoteForm';
+import { TextNote } from "./TextNote/TextNote";
+import { AddNoteForm } from "./AddNoteForm/AddNoteForm";
 
 const MedicationDetails = () => {
   const { id } = useParams();
@@ -28,7 +28,7 @@ const MedicationDetails = () => {
 
   const handleDelete = () => {
     deleteMedication(id ?? "");
-    navigate('/');
+    navigate("/");
   };
 
   if (!medication) {
@@ -58,7 +58,7 @@ const MedicationDetails = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {isEditing ? 'Cancel' : 'Edit'}
+            {isEditing ? "Cancel" : "Edit"}
           </motion.button>
           <motion.button
             className="medication-details__delete-button"
@@ -70,34 +70,49 @@ const MedicationDetails = () => {
           </motion.button>
         </div>
         {isEditing ? (
-          <AddMedicationForm medication={medication} onClose={() => setIsEditing(false)} />
+          <AddMedicationForm
+            medication={medication}
+            onClose={() => setIsEditing(false)}
+          />
         ) : (
           <>
             <div className="medication-details__info">
               <div className="medication-details__info-item">
-                <span className="medication-details__info-label">Description:</span>
+                <span className="medication-details__info-label">
+                  Description:
+                </span>
                 {medication.description}
               </div>
               <div className="medication-details__info-item">
-                <span className="medication-details__info-label">Current Count:</span>
+                <span className="medication-details__info-label">
+                  Current Count:
+                </span>
                 {medication.count}
               </div>
               <div className="medication-details__info-item">
-                <span className="medication-details__info-label">Destination Count:</span>
+                <span className="medication-details__info-label">
+                  Destination Count:
+                </span>
                 {medication.destinationCount}
               </div>
               <div className="medication-details__info-item">
-                <span className="medication-details__info-label">Last Updated:</span>
-                {medication.updatedAt ? new Date(medication.updatedAt).toLocaleString() : 'N/A'}
+                <span className="medication-details__info-label">
+                  Last Updated:
+                </span>
+                {medication.updatedAt
+                  ? new Date(medication.updatedAt).toLocaleString()
+                  : "N/A"}
               </div>
-              {medication.notes && medication.notes.length > 0 && 
+              {medication.notes &&
+                medication.notes.length > 0 &&
                 medication.notes.map((note, index) => (
                   <div key={index} className="medication-details__info-item">
-                    <span className="medication-details__info-label">Note:</span>
+                    <span className="medication-details__info-label">
+                      Note:
+                    </span>
                     <TextNote text={note} />
                   </div>
-                ))
-              }
+                ))}
             </div>
             {!isAddingNote && (
               <motion.button
@@ -110,13 +125,16 @@ const MedicationDetails = () => {
               </motion.button>
             )}
             {isAddingNote && (
-              <AddNoteForm medication={medication} onClose={() => setIsAddingNote(false)} />
+              <AddNoteForm
+                medication={medication}
+                onClose={() => setIsAddingNote(false)}
+              />
             )}
           </>
         )}
       </motion.div>
     </motion.div>
   );
-}
+};
 
 export default MedicationDetails;

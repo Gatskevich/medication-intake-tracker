@@ -1,4 +1,3 @@
 export interface IMedicationNoteForm {
-    note: string;
+  note: string;
 }
-  

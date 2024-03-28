@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 type SetValue<T> = (value: T) => void;
 type UseStorageHookResult<T> = [T, SetValue<T>];
 
-export function useStorage<T>(key: string, initialValue: T): UseStorageHookResult<T> {
+export function useStorage<T>(
+  key: string,
+  initialValue: T,
+): UseStorageHookResult<T> {
   const storedValue = localStorage.getItem(key);
   const initial = storedValue ? JSON.parse(storedValue) : initialValue;
 

@@ -1,5 +1,3 @@
 import { IMedication } from "./IMedication";
 
-export {
-    IMedication,
-}
+export { IMedication };

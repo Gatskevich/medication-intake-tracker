@@ -1,11 +1,44 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
+  "plugins": [
+    "@nx",
+    "react",
+    "unicorn",
+    "react-hooks",
+    "eslint-plugin-prettier",
+    "@typescript-eslint"
+  ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "plugin:@nx/typescript",
+        "eslint-config-prettier",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
       "rules": {
+        "cypress/unsafe-to-chain-command": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "react/function-component-definition": "off",
+        "unicorn/numeric-separators-style": "off",
+        "import/prefer-default-export": "off",
+        "unicorn/no-abusive-eslint-disable": "off",
+        "react/require-default-props": "off",
+        "unicorn/no-zero-fractions": "off",
+        "unicorn/no-negated-condition": "off",
+        "unicorn/explicit-length-check": "off",
+        "unicorn/no-array-reduce": "off",
+        "unicorn/no-useless-undefined": "off",
+        "unicorn/no-array-for-each": "off",
+        "no-restricted-syntax": "off",
+        "react/jsx-boolean-value": "error",
+        "import/no-extraneous-dependencies": "off",
+        "unicorn/filename-case": "off",
+        "react/jsx-uses-react": "off",
         "@nx/enforce-module-boundaries": [
           "error",
           {
@@ -18,18 +51,73 @@
               }
             ]
           }
+        ],
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
         ]
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript", "eslint-config-prettier"],
       "rules": {}
     },
     {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nx/javascript"],
-      "rules": {}
+      "files": ["*.spec.tsx"],
+      "extends": [
+        "plugin:@nx/typescript",
+        "eslint-config-prettier",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/no-empty-function": "off"
+      }
     }
-  ]
+  ],
+  "rules": {
+    "react/jsx-props-no-spreading": "off",
+    "global-require": "off",
+    "react/react-in-jsx-scope": "off",
+    "unicorn/no-null": "off",
+    "unicorn/prefer-query-selector": "off",
+    "unicorn/prevent-abbreviations": "off",
+    "react/function-component-definition": "off",
+    "unicorn/numeric-separators-style": "off",
+    "import/prefer-default-export": "off",
+    "unicorn/no-abusive-eslint-disable": "off",
+    "react/require-default-props": "off",
+    "unicorn/no-zero-fractions": "off",
+    "unicorn/no-negated-condition": "off",
+    "unicorn/explicit-length-check": "off",
+    "unicorn/no-array-reduce": "off",
+    "unicorn/no-useless-undefined": "off",
+    "unicorn/no-array-for-each": "off",
+    "no-restricted-syntax": "off",
+    "react/jsx-boolean-value": "error",
+    "import/no-extraneous-dependencies": "off",
+    "unicorn/filename-case": "off",
+    "react/jsx-uses-react": "off",
+    "@nx/enforce-module-boundaries": [
+      "error",
+      {
+        "enforceBuildableLibDependency": true,
+        "allow": [],
+        "depConstraints": [
+          {
+            "sourceTag": "*",
+            "onlyDependOnLibsWithTags": ["*"]
+          }
+        ]
+      }
+    ],
+    "prettier/prettier": ["error", { "endOfLine": "auto" },  {
+      "usePrettierrc": false
+    }]
+  }
 }

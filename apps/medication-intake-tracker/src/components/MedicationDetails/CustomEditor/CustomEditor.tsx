@@ -8,7 +8,11 @@ interface CustomEditorProps {
   error?: boolean;
 }
 
-export const CustomEditor = ({ field, readOnly = false, error }: CustomEditorProps) => {
+export const CustomEditor = ({
+  field,
+  readOnly = false,
+  error,
+}: CustomEditorProps) => {
   const handleChange = (content: string) => {
     const strippedContent = content.replace(/<[^>]*>/g, "");
     const isContentEmpty = strippedContent.trim() === "";
@@ -22,27 +26,41 @@ export const CustomEditor = ({ field, readOnly = false, error }: CustomEditorPro
 
   return (
     <ReactQuill
-      className={`custom-editor ${error ? 'error' : ''}`}
+      className={`custom-editor ${error ? "error" : ""}`}
       readOnly={readOnly}
       value={field.value}
       onChange={handleChange}
       onBlur={field.onBlur}
       modules={{
         toolbar: [
-          [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-          [{size: []}],
-          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [{'list': 'ordered'}, {'list': 'bullet'}, 
-           {'indent': '-1'}, {'indent': '+1'}],
-          ['link', 'image', 'video'],
-          ['clean']
+          [{ header: "1" }, { header: "2" }, { font: [] }],
+          [{ size: [] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [
+            { list: "ordered" },
+            { list: "bullet" },
+            { indent: "-1" },
+            { indent: "+1" },
+          ],
+          ["link", "image", "video"],
+          ["clean"],
         ],
       }}
       formats={[
-        'header', 'font', 'size',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'indent',
-        'link', 'image', 'video'
+        "header",
+        "font",
+        "size",
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        "blockquote",
+        "list",
+        "bullet",
+        "indent",
+        "link",
+        "image",
+        "video",
       ]}
     />
   );

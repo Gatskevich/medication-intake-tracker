@@ -1,13 +1,19 @@
-import { useEffect, useReducer, useRef } from 'react';
-import { IMedication } from '../interfaces';
-import { useStorage } from '../utils/custom-hooks/useStorage';
-import { initialState, medicationsReducer } from '../utils/reducers/medicationsReducer';
-import { IMedicationForm } from '../interfaces/IMedicationForm';
+import { useEffect, useReducer, useRef } from "react";
+import { IMedication } from "../interfaces";
+import { useStorage } from "../utils/custom-hooks/useStorage";
+import {
+  initialState,
+  medicationsReducer,
+} from "../utils/reducers/medicationsReducer";
+import { IMedicationForm } from "../interfaces/IMedicationForm";
 
 export interface IMedicationService {
   medications: IMedication[];
   addMedication: (medication: IMedicationForm) => void;
-  updateMedication: (id: string, updatedMedication: Partial<IMedication>) => void;
+  updateMedication: (
+    id: string,
+    updatedMedication: Partial<IMedication>,
+  ) => void;
   deleteMedication: (id: string) => void;
   getMedicationById: (id: string) => IMedication | undefined;
 }
@@ -17,15 +23,18 @@ const generateId = (): string => {
 };
 
 export const useMedicationService = (): IMedicationService => {
-  const [medicationsStorage, setMedicationsStorage] = useStorage<IMedication[]>('medications', []);
+  const [medicationsStorage, setMedicationsStorage] = useStorage<IMedication[]>(
+    "medications",
+    [],
+  );
   const [state, dispatch] = useReducer(medicationsReducer, initialState);
   const { medications } = state;
 
   const firstRender = useRef(true);
 
   useEffect(() => {
-    dispatch({ type: 'INITIALIZE_MEDICATIONS', payload: medicationsStorage });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch({ type: "INITIALIZE_MEDICATIONS", payload: medicationsStorage });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -40,29 +49,35 @@ export const useMedicationService = (): IMedicationService => {
     const newMedication: IMedication = {
       ...medication,
       id: generateId(),
-      updatedAt: Date.now()
+      updatedAt: Date.now(),
     };
-  
-    dispatch({ type: 'ADD_MEDICATION', payload: newMedication });
+
+    dispatch({ type: "ADD_MEDICATION", payload: newMedication });
   };
 
-  const updateMedication = (id: string, updatedMedication: Partial<IMedication>) => {
-    dispatch({ type: 'UPDATE_MEDICATION',  payload: { id, ...updatedMedication, updatedAt: Date.now() } });
+  const updateMedication = (
+    id: string,
+    updatedMedication: Partial<IMedication>,
+  ) => {
+    dispatch({
+      type: "UPDATE_MEDICATION",
+      payload: { id, ...updatedMedication, updatedAt: Date.now() },
+    });
   };
 
   const deleteMedication = (id: string) => {
-    dispatch({ type: 'DELETE_MEDICATION', payload: id });
+    dispatch({ type: "DELETE_MEDICATION", payload: id });
   };
 
   const getMedicationById = (id: string) => {
-    return medications.find(medication => medication.id === id);
+    return medications.find((medication) => medication.id === id);
   };
- 
+
   return {
     medications,
     addMedication,
     updateMedication,
     deleteMedication,
-    getMedicationById
+    getMedicationById,
   };
 };
