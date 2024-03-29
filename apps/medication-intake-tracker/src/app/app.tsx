@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { MedicationsProvider } from "../utils/contexts/MedicationsContext";
 
 const LazyMedicationList = lazy(
-  () => import("../components/MedicationList/MedicationList"),
+  () => import("../pages/MedicationList/MedicationList"),
 );
 const LazyMedicationDetails = lazy(
-  () => import("../components/MedicationDetails/MedicationDetails"),
+  () => import("../pages/MedicationDetails/MedicationDetails"),
 );
 
 const App = () => {
