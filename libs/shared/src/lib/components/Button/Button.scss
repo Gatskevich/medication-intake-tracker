@@ -1,0 +1,36 @@
+.medication-button {
+  display: inline-block;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+.primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.primary:hover {
+  background-color: #0056b3;
+}
+
+.secondary {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.secondary:hover {
+  background-color: #218838;
+}
+
+.error {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.error:hover {
+  background-color: #c82333;
+}

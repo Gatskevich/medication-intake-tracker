@@ -1,0 +1,59 @@
+.medication-details {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  min-height: 100vh;
+
+  &__container {
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__info {
+    margin-bottom: 20px;
+  }
+
+  &__info-item {
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    word-break: break-word; 
+  }
+
+  &__info-label {
+    font-weight: bold;
+    color: #555;
+  }
+
+  &__note-form {
+    margin-top: 20px;
+  }
+
+  .button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
