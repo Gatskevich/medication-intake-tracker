@@ -5,6 +5,7 @@ import { InputField } from "./InputField/InputField";
 import { TextNote } from "./TextNote/TextNote";
 import { CustomEditor } from "./CustomEditor/CustomEditor";
 import { ConfirmModal } from "./ConfirmModal/ConfirmModal";
+import { Animation } from "./Animation/Animation";
 
 export {
   CustomModal,
@@ -14,4 +15,5 @@ export {
   TextNote,
   CustomEditor,
   ConfirmModal,
+  Animation,
 };
