@@ -4,17 +4,25 @@ import { motion } from "framer-motion";
 import { IMedication } from "../../interfaces";
 import { useMedication } from "../../utils/contexts/MedicationsContext";
 import { AddMedicationForm } from "../../components/AddMedicationForm/AddMedicationForm";
-import { Button, TextNote } from "@medication-intake-tracker/shared";
+import {
+  Button,
+  ConfirmModal,
+  TextNote,
+} from "@medication-intake-tracker/shared";
 import { AddNoteForm } from "../../components/AddNoteForm/AddNoteForm";
 import "./MedicationDetails.scss";
 
 const MedicationDetails = () => {
   const { id } = useParams();
+
   const navigate = useNavigate();
+
   const { getMedicationById, deleteMedication } = useMedication();
+
   const [medication, setMedication] = useState<IMedication | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingNote, setIsAddingNote] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const medication = getMedicationById(id ?? "") || null;
@@ -70,7 +78,7 @@ const MedicationDetails = () => {
                 <Button onClick={() => setIsEditing(true)} color="PRIMARY">
                   Edit
                 </Button>
-                <Button onClick={handleDelete} color="ERROR">
+                <Button onClick={() => setIsDeleting(true)} color="ERROR">
                   Delete
                 </Button>
               </motion.div>
@@ -141,6 +149,13 @@ const MedicationDetails = () => {
           </>
         )}
       </motion.div>
+      <ConfirmModal
+        isOpen={isDeleting}
+        title="Delete Medication"
+        text="Are you sure you want to delete this medication?"
+        onConfirm={handleDelete}
+        closeModal={() => setIsDeleting(false)}
+      />
     </motion.div>
   );
 };

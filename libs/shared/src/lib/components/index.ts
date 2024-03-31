@@ -4,5 +4,14 @@ import { IconButton } from "./IconButton/IconButton";
 import { InputField } from "./InputField/InputField";
 import { TextNote } from "./TextNote/TextNote";
 import { CustomEditor } from "./CustomEditor/CustomEditor";
+import { ConfirmModal } from "./ConfirmModal/ConfirmModal";
 
-export { CustomModal, Button, IconButton, InputField, TextNote, CustomEditor };
+export {
+  CustomModal,
+  Button,
+  IconButton,
+  InputField,
+  TextNote,
+  CustomEditor,
+  ConfirmModal,
+};
